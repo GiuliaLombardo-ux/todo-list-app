@@ -31,6 +31,33 @@ function renderTodos() {
       saveTodos();
       renderTodos();
     });
+const addBtn = document.getElementById('addBtn');
+const taskInput = document.getElementById('taskInput');
+const taskList = document.getElementById('taskList');
+
+addBtn.addEventListener('click', () => {
+  const taskText = taskInput.value.trim();
+  if (taskText !== '') {
+    const li = document.createElement('li');
+    li.textContent = taskText;
+
+    // Aggiungi l'evento di click per la spunta
+    li.addEventListener('click', () => {
+      li.classList.toggle('checked');
+    });
+
+    taskList.appendChild(li);
+    taskInput.value = '';
+    taskInput.focus();
+  }
+});
+
+// Aggiungi la possibilità di aggiungere task premendo "Invio"
+taskInput.addEventListener('keypress', (e) => {
+  if (e.key === 'Enter') {
+    addBtn.click();
+  }
+});
 
     li.appendChild(removeBtn);
     todoList.appendChild(li);
@@ -50,4 +77,5 @@ todoForm.addEventListener('submit', (e) => {
 });
 
 renderTodos();
+
  
