@@ -98,6 +98,34 @@ body {
   padding-left: 20px;
   font-family: var(--font-serif);
 }
+ul.todo-list li {
+  cursor: pointer;
+  position: relative;
+  user-select: none;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+ul.todo-list li.checked {
+  text-decoration: line-through;
+  color: #a67687;
+  background-color: #f0c7d7;
+}
+
+ul.todo-list li::before {
+  content: '✔';
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0;
+  color: #cc2e65;
+  font-weight: 700;
+  transition: opacity 0.3s;
+}
+
+ul.todo-list li.checked::before {
+  opacity: 1;
+}
 
 .projects-card h1 {
   font-weight: 700;
@@ -190,4 +218,5 @@ ul, li {
   margin: 0;
   list-style: none;
 }
+
 
