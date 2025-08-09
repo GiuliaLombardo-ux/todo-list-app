@@ -1,37 +1,1726 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Projects</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: linear-gradient(to right, #f8b9c4, #fcd0d9);
-      margin: 0;
-      padding: 0;
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>To-Do List con Spunte</title>
+<style>
+  body {
+    font-family: 'Poppins', Arial, sans-serif;
+    background: linear-gradient(135deg, #fad6de, #fff0f5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  .page-container {
+    background: white;
+    border-radius: 15px;
+    padding: 40px 60px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    width: 400px;
+  }
+  h2 {
+    color: #cc2e65;
+    margin-bottom: 20px;
+  }
+  input[type="text"] {
+    width: calc(100% - 70px);
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #cc2e65;
+    font-size: 1em;
+  }
+  button {
+    padding: 10px 14px;
+    background: #cc2e65;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-left: 6px;
+    font-weight: 600;
+    transition: background 0.3s;
+  }
+  button:hover {
+    background: #a3274f;
+  }
+  ul.todo-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+  }
+  ul.todo-list li {
+    background: #fad6de;
+    padding: 10px 15px 10px 35px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    color: #662b4d;
+    font-weight: 500;
+    cursor: pointer;
+    position: relative;
+    user-select: none;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  ul.todo-list li.checked {
+    text-decoration: line-through;
+    color: #a67687;
+    background-color: #f0c7d7;
+  }
+  ul.todo-list li::before {
+    content: '✔';
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0;
+    color: #cc2e65;
+    font-weight: 700;
+    transition: opacity 0.3s;
+  }
+  ul.todo-list li.checked::before {
+    opacity: 1;
+  }
+</style>
+</head>
+<body>
+  <div class="page-container">
+    <h2>To-Do List</h2>
+    <input id="taskInput" type="text" placeholder="Add new task..." />
+    <button id="addBtn" type="button">Add</button>
+    <ul id="taskList" class="todo-list"></ul>
+  </div>
+
+  <script>
+    const addBtn = document.getElementById('addBtn');
+    const taskInput = document.getElementById('taskInput');
+    const taskList = document.getElementById('taskList');
+
+    function addTask() {
+      const taskText = taskInput.value.trim();
+      if (taskText !== '') {
+        const li = document.createElement('li');
+        li.textContent = taskText;
+        li.addEventListener('click', () => {
+          li.classList.toggle('checked');
+        });
+        taskList.appendChild(li);
+        taskInput.value = '';
+        taskInput.focus();
+      }
     }
 
-    .container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 40px;
+    addBtn.addEventListener('click', addTask);
+
+    taskInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        addTask();
+      }
+    });
+  </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>To-Do List con Spunte</title>
+<style>
+  body {
+    font-family: 'Poppins', Arial, sans-serif;
+    background: linear-gradient(135deg, #fad6de, #fff0f5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  .page-container {
+    background: white;
+    border-radius: 15px;
+    padding: 40px 60px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    width: 400px;
+  }
+  h2 {
+    color: #cc2e65;
+    margin-bottom: 20px;
+  }
+  input[type="text"] {
+    width: calc(100% - 70px);
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #cc2e65;
+    font-size: 1em;
+  }
+  button {
+    padding: 10px 14px;
+    background: #cc2e65;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-left: 6px;
+    font-weight: 600;
+    transition: background 0.3s;
+  }
+  button:hover {
+    background: #a3274f;
+  }
+  ul.todo-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+  }
+  ul.todo-list li {
+    background: #fad6de;
+    padding: 10px 15px 10px 35px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    color: #662b4d;
+    font-weight: 500;
+    cursor: pointer;
+    position: relative;
+    user-select: none;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  ul.todo-list li.checked {
+    text-decoration: line-through;
+    color: #a67687;
+    background-color: #f0c7d7;
+  }
+  ul.todo-list li::before {
+    content: '✔';
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0;
+    color: #cc2e65;
+    font-weight: 700;
+    transition: opacity 0.3s;
+  }
+  ul.todo-list li.checked::before {
+    opacity: 1;
+  }
+</style>
+</head>
+<body>
+  <div class="page-container">
+    <h2>To-Do List</h2>
+    <input id="taskInput" type="text" placeholder="Add new task..." />
+    <button id="addBtn" type="button">Add</button>
+    <ul id="taskList" class="todo-list"></ul>
+  </div>
+
+  <script>
+    const addBtn = document.getElementById('addBtn');
+    const taskInput = document.getElementById('taskInput');
+    const taskList = document.getElementById('taskList');
+
+    function addTask() {
+      const taskText = taskInput.value.trim();
+      if (taskText !== '') {
+        const li = document.createElement('li');
+        li.textContent = taskText;
+        li.addEventListener('click', () => {
+          li.classList.toggle('checked');
+        });
+        taskList.appendChild(li);
+        taskInput.value = '';
+        taskInput.focus();
+      }
     }
 
-    .my-projects-card {
-      background-color: #fff;
-      padding: 20px;
-      border-radius: 15px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      width: 80%;
-      max-width: 900px;
+    addBtn.addEventListener('click', addTask);
+
+    taskInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        addTask();
+      }
+    });
+  </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>To-Do List con Spunte</title>
+<style>
+  body {
+    font-family: 'Poppins', Arial, sans-serif;
+    background: linear-gradient(135deg, #fad6de, #fff0f5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  .page-container {
+    background: white;
+    border-radius: 15px;
+    padding: 40px 60px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    width: 400px;
+  }
+  h2 {
+    color: #cc2e65;
+    margin-bottom: 20px;
+  }
+  input[type="text"] {
+    width: calc(100% - 70px);
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #cc2e65;
+    font-size: 1em;
+  }
+  button {
+    padding: 10px 14px;
+    background: #cc2e65;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-left: 6px;
+    font-weight: 600;
+    transition: background 0.3s;
+  }
+  button:hover {
+    background: #a3274f;
+  }
+  ul.todo-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+  }
+  ul.todo-list li {
+    background: #fad6de;
+    padding: 10px 15px 10px 35px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    color: #662b4d;
+    font-weight: 500;
+    cursor: pointer;
+    position: relative;
+    user-select: none;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  ul.todo-list li.checked {
+    text-decoration: line-through;
+    color: #a67687;
+    background-color: #f0c7d7;
+  }
+  ul.todo-list li::before {
+    content: '✔';
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0;
+    color: #cc2e65;
+    font-weight: 700;
+    transition: opacity 0.3s;
+  }
+  ul.todo-list li.checked::before {
+    opacity: 1;
+  }
+</style>
+</head>
+<body>
+  <div class="page-container">
+    <h2>To-Do List</h2>
+    <input id="taskInput" type="text" placeholder="Add new task..." />
+    <button id="addBtn" type="button">Add</button>
+    <ul id="taskList" class="todo-list"></ul>
+  </div>
+
+  <script>
+    const addBtn = document.getElementById('addBtn');
+    const taskInput = document.getElementById('taskInput');
+    const taskList = document.getElementById('taskList');
+
+    function addTask() {
+      const taskText = taskInput.value.trim();
+      if (taskText !== '') {
+        const li = document.createElement('li');
+        li.textContent = taskText;
+        li.addEventListener('click', () => {
+          li.classList.toggle('checked');
+        });
+        taskList.appendChild(li);
+        taskInput.value = '';
+        taskInput.focus();
+      }
     }
 
-    .my-projects-card h1 {
-      text-align: center;
-      margin-bottom: 20px;
+    addBtn.addEventListener('click', addTask);
+
+    taskInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        addTask();
+      }
+    });
+  </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>To-Do List con Spunte</title>
+<style>
+  body {
+    font-family: 'Poppins', Arial, sans-serif;
+    background: linear-gradient(135deg, #fad6de, #fff0f5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  .page-container {
+    background: white;
+    border-radius: 15px;
+    padding: 40px 60px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    width: 400px;
+  }
+  h2 {
+    color: #cc2e65;
+    margin-bottom: 20px;
+  }
+  input[type="text"] {
+    width: calc(100% - 70px);
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #cc2e65;
+    font-size: 1em;
+  }
+  button {
+    padding: 10px 14px;
+    background: #cc2e65;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-left: 6px;
+    font-weight: 600;
+    transition: background 0.3s;
+  }
+  button:hover {
+    background: #a3274f;
+  }
+  ul.todo-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+  }
+  ul.todo-list li {
+    background: #fad6de;
+    padding: 10px 15px 10px 35px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    color: #662b4d;
+    font-weight: 500;
+    cursor: pointer;
+    position: relative;
+    user-select: none;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  ul.todo-list li.checked {
+    text-decoration: line-through;
+    color: #a67687;
+    background-color: #f0c7d7;
+  }
+  ul.todo-list li::before {
+    content: '✔';
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0;
+    color: #cc2e65;
+    font-weight: 700;
+    transition: opacity 0.3s;
+  }
+  ul.todo-list li.checked::before {
+    opacity: 1;
+  }
+</style>
+</head>
+<body>
+  <div class="page-container">
+    <h2>To-Do List</h2>
+    <input id="taskInput" type="text" placeholder="Add new task..." />
+    <button id="addBtn" type="button">Add</button>
+    <ul id="taskList" class="todo-list"></ul>
+  </div>
+
+  <script>
+    const addBtn = document.getElementById('addBtn');
+    const taskInput = document.getElementById('taskInput');
+    const taskList = document.getElementById('taskList');
+
+    function addTask() {
+      const taskText = taskInput.value.trim();
+      if (taskText !== '') {
+        const li = document.createElement('li');
+        li.textContent = taskText;
+        li.addEventListener('click', () => {
+          li.classList.toggle('checked');
+        });
+        taskList.appendChild(li);
+        taskInput.value = '';
+        taskInput.focus();
+      }
     }
+
+    addBtn.addEventListener('click', addTask);
+
+    taskInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        addTask();
+      }
+    });
+  </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>To-Do List con Spunte</title>
+<style>
+  body {
+    font-family: 'Poppins', Arial, sans-serif;
+    background: linear-gradient(135deg, #fad6de, #fff0f5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  .page-container {
+    background: white;
+    border-radius: 15px;
+    padding: 40px 60px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    width: 400px;
+  }
+  h2 {
+    color: #cc2e65;
+    margin-bottom: 20px;
+  }
+  input[type="text"] {
+    width: calc(100% - 70px);
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #cc2e65;
+    font-size: 1em;
+  }
+  button {
+    padding: 10px 14px;
+    background: #cc2e65;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-left: 6px;
+    font-weight: 600;
+    transition: background 0.3s;
+  }
+  button:hover {
+    background: #a3274f;
+  }
+  ul.todo-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+  }
+  ul.todo-list li {
+    background: #fad6de;
+    padding: 10px 15px 10px 35px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    color: #662b4d;
+    font-weight: 500;
+    cursor: pointer;
+    position: relative;
+    user-select: none;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  ul.todo-list li.checked {
+    text-decoration: line-through;
+    color: #a67687;
+    background-color: #f0c7d7;
+  }
+  ul.todo-list li::before {
+    content: '✔';
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0;
+    color: #cc2e65;
+    font-weight: 700;
+    transition: opacity 0.3s;
+  }
+  ul.todo-list li.checked::before {
+    opacity: 1;
+  }
+</style>
+</head>
+<body>
+  <div class="page-container">
+    <h2>To-Do List</h2>
+    <input id="taskInput" type="text" placeholder="Add new task..." />
+    <button id="addBtn" type="button">Add</button>
+    <ul id="taskList" class="todo-list"></ul>
+  </div>
+
+  <script>
+    const addBtn = document.getElementById('addBtn');
+    const taskInput = document.getElementById('taskInput');
+    const taskList = document.getElementById('taskList');
+
+    function addTask() {
+      const taskText = taskInput.value.trim();
+      if (taskText !== '') {
+        const li = document.createElement('li');
+        li.textContent = taskText;
+        li.addEventListener('click', () => {
+          li.classList.toggle('checked');
+        });
+        taskList.appendChild(li);
+        taskInput.value = '';
+        taskInput.focus();
+      }
+    }
+
+    addBtn.addEventListener('click', addTask);
+
+    taskInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        addTask();
+      }
+    });
+  </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>To-Do List con Spunte</title>
+<style>
+  body {
+    font-family: 'Poppins', Arial, sans-serif;
+    background: linear-gradient(135deg, #fad6de, #fff0f5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  .page-container {
+    background: white;
+    border-radius: 15px;
+    padding: 40px 60px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    width: 400px;
+  }
+  h2 {
+    color: #cc2e65;
+    margin-bottom: 20px;
+  }
+  input[type="text"] {
+    width: calc(100% - 70px);
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #cc2e65;
+    font-size: 1em;
+  }
+  button {
+    padding: 10px 14px;
+    background: #cc2e65;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-left: 6px;
+    font-weight: 600;
+    transition: background 0.3s;
+  }
+  button:hover {
+    background: #a3274f;
+  }
+  ul.todo-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+  }
+  ul.todo-list li {
+    background: #fad6de;
+    padding: 10px 15px 10px 35px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    color: #662b4d;
+    font-weight: 500;
+    cursor: pointer;
+    position: relative;
+    user-select: none;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  ul.todo-list li.checked {
+    text-decoration: line-through;
+    color: #a67687;
+    background-color: #f0c7d7;
+  }
+  ul.todo-list li::before {
+    content: '✔';
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0;
+    color: #cc2e65;
+    font-weight: 700;
+    transition: opacity 0.3s;
+  }
+  ul.todo-list li.checked::before {
+    opacity: 1;
+  }
+</style>
+</head>
+<body>
+  <div class="page-container">
+    <h2>To-Do List</h2>
+    <input id="taskInput" type="text" placeholder="Add new task..." />
+    <button id="addBtn" type="button">Add</button>
+    <ul id="taskList" class="todo-list"></ul>
+  </div>
+
+  <script>
+    const addBtn = document.getElementById('addBtn');
+    const taskInput = document.getElementById('taskInput');
+    const taskList = document.getElementById('taskList');
+
+    function addTask() {
+      const taskText = taskInput.value.trim();
+      if (taskText !== '') {
+        const li = document.createElement('li');
+        li.textContent = taskText;
+        li.addEventListener('click', () => {
+          li.classList.toggle('checked');
+        });
+        taskList.appendChild(li);
+        taskInput.value = '';
+        taskInput.focus();
+      }
+    }
+
+    addBtn.addEventListener('click', addTask);
+
+    taskInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        addTask();
+      }
+    });
+  </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>To-Do List con Spunte</title>
+<style>
+  body {
+    font-family: 'Poppins', Arial, sans-serif;
+    background: linear-gradient(135deg, #fad6de, #fff0f5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  .page-container {
+    background: white;
+    border-radius: 15px;
+    padding: 40px 60px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    width: 400px;
+  }
+  h2 {
+    color: #cc2e65;
+    margin-bottom: 20px;
+  }
+  input[type="text"] {
+    width: calc(100% - 70px);
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #cc2e65;
+    font-size: 1em;
+  }
+  button {
+    padding: 10px 14px;
+    background: #cc2e65;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-left: 6px;
+    font-weight: 600;
+    transition: background 0.3s;
+  }
+  button:hover {
+    background: #a3274f;
+  }
+  ul.todo-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+  }
+  ul.todo-list li {
+    background: #fad6de;
+    padding: 10px 15px 10px 35px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    color: #662b4d;
+    font-weight: 500;
+    cursor: pointer;
+    position: relative;
+    user-select: none;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  ul.todo-list li.checked {
+    text-decoration: line-through;
+    color: #a67687;
+    background-color: #f0c7d7;
+  }
+  ul.todo-list li::before {
+    content: '✔';
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0;
+    color: #cc2e65;
+    font-weight: 700;
+    transition: opacity 0.3s;
+  }
+  ul.todo-list li.checked::before {
+    opacity: 1;
+  }
+</style>
+</head>
+<body>
+  <div class="page-container">
+    <h2>To-Do List</h2>
+    <input id="taskInput" type="text" placeholder="Add new task..." />
+    <button id="addBtn" type="button">Add</button>
+    <ul id="taskList" class="todo-list"></ul>
+  </div>
+
+  <script>
+    const addBtn = document.getElementById('addBtn');
+    const taskInput = document.getElementById('taskInput');
+    const taskList = document.getElementById('taskList');
+
+    function addTask() {
+      const taskText = taskInput.value.trim();
+      if (taskText !== '') {
+        const li = document.createElement('li');
+        li.textContent = taskText;
+        li.addEventListener('click', () => {
+          li.classList.toggle('checked');
+        });
+        taskList.appendChild(li);
+        taskInput.value = '';
+        taskInput.focus();
+      }
+    }
+
+    addBtn.addEventListener('click', addTask);
+
+    taskInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        addTask();
+      }
+    });
+  </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>To-Do List con Spunte</title>
+<style>
+  body {
+    font-family: 'Poppins', Arial, sans-serif;
+    background: linear-gradient(135deg, #fad6de, #fff0f5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  .page-container {
+    background: white;
+    border-radius: 15px;
+    padding: 40px 60px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    width: 400px;
+  }
+  h2 {
+    color: #cc2e65;
+    margin-bottom: 20px;
+  }
+  input[type="text"] {
+    width: calc(100% - 70px);
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #cc2e65;
+    font-size: 1em;
+  }
+  button {
+    padding: 10px 14px;
+    background: #cc2e65;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-left: 6px;
+    font-weight: 600;
+    transition: background 0.3s;
+  }
+  button:hover {
+    background: #a3274f;
+  }
+  ul.todo-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+  }
+  ul.todo-list li {
+    background: #fad6de;
+    padding: 10px 15px 10px 35px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    color: #662b4d;
+    font-weight: 500;
+    cursor: pointer;
+    position: relative;
+    user-select: none;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  ul.todo-list li.checked {
+    text-decoration: line-through;
+    color: #a67687;
+    background-color: #f0c7d7;
+  }
+  ul.todo-list li::before {
+    content: '✔';
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0;
+    color: #cc2e65;
+    font-weight: 700;
+    transition: opacity 0.3s;
+  }
+  ul.todo-list li.checked::before {
+    opacity: 1;
+  }
+</style>
+</head>
+<body>
+  <div class="page-container">
+    <h2>To-Do List</h2>
+    <input id="taskInput" type="text" placeholder="Add new task..." />
+    <button id="addBtn" type="button">Add</button>
+    <ul id="taskList" class="todo-list"></ul>
+  </div>
+
+  <script>
+    const addBtn = document.getElementById('addBtn');
+    const taskInput = document.getElementById('taskInput');
+    const taskList = document.getElementById('taskList');
+
+    function addTask() {
+      const taskText = taskInput.value.trim();
+      if (taskText !== '') {
+        const li = document.createElement('li');
+        li.textContent = taskText;
+        li.addEventListener('click', () => {
+          li.classList.toggle('checked');
+        });
+        taskList.appendChild(li);
+        taskInput.value = '';
+        taskInput.focus();
+      }
+    }
+
+    addBtn.addEventListener('click', addTask);
+
+    taskInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        addTask();
+      }
+    });
+  </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>To-Do List con Spunte</title>
+<style>
+  body {
+    font-family: 'Poppins', Arial, sans-serif;
+    background: linear-gradient(135deg, #fad6de, #fff0f5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  .page-container {
+    background: white;
+    border-radius: 15px;
+    padding: 40px 60px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    width: 400px;
+  }
+  h2 {
+    color: #cc2e65;
+    margin-bottom: 20px;
+  }
+  input[type="text"] {
+    width: calc(100% - 70px);
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #cc2e65;
+    font-size: 1em;
+  }
+  button {
+    padding: 10px 14px;
+    background: #cc2e65;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-left: 6px;
+    font-weight: 600;
+    transition: background 0.3s;
+  }
+  button:hover {
+    background: #a3274f;
+  }
+  ul.todo-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+  }
+  ul.todo-list li {
+    background: #fad6de;
+    padding: 10px 15px 10px 35px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    color: #662b4d;
+    font-weight: 500;
+    cursor: pointer;
+    position: relative;
+    user-select: none;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  ul.todo-list li.checked {
+    text-decoration: line-through;
+    color: #a67687;
+    background-color: #f0c7d7;
+  }
+  ul.todo-list li::before {
+    content: '✔';
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0;
+    color: #cc2e65;
+    font-weight: 700;
+    transition: opacity 0.3s;
+  }
+  ul.todo-list li.checked::before {
+    opacity: 1;
+  }
+</style>
+</head>
+<body>
+  <div class="page-container">
+    <h2>To-Do List</h2>
+    <input id="taskInput" type="text" placeholder="Add new task..." />
+    <button id="addBtn" type="button">Add</button>
+    <ul id="taskList" class="todo-list"></ul>
+  </div>
+
+  <script>
+    const addBtn = document.getElementById('addBtn');
+    const taskInput = document.getElementById('taskInput');
+    const taskList = document.getElementById('taskList');
+
+    function addTask() {
+      const taskText = taskInput.value.trim();
+      if (taskText !== '') {
+        const li = document.createElement('li');
+        li.textContent = taskText;
+        li.addEventListener('click', () => {
+          li.classList.toggle('checked');
+        });
+        taskList.appendChild(li);
+        taskInput.value = '';
+        taskInput.focus();
+      }
+    }
+
+    addBtn.addEventListener('click', addTask);
+
+    taskInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        addTask();
+      }
+    });
+  </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>To-Do List con Spunte</title>
+<style>
+  body {
+    font-family: 'Poppins', Arial, sans-serif;
+    background: linear-gradient(135deg, #fad6de, #fff0f5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  .page-container {
+    background: white;
+    border-radius: 15px;
+    padding: 40px 60px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    width: 400px;
+  }
+  h2 {
+    color: #cc2e65;
+    margin-bottom: 20px;
+  }
+  input[type="text"] {
+    width: calc(100% - 70px);
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #cc2e65;
+    font-size: 1em;
+  }
+  button {
+    padding: 10px 14px;
+    background: #cc2e65;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-left: 6px;
+    font-weight: 600;
+    transition: background 0.3s;
+  }
+  button:hover {
+    background: #a3274f;
+  }
+  ul.todo-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+  }
+  ul.todo-list li {
+    background: #fad6de;
+    padding: 10px 15px 10px 35px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    color: #662b4d;
+    font-weight: 500;
+    cursor: pointer;
+    position: relative;
+    user-select: none;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  ul.todo-list li.checked {
+    text-decoration: line-through;
+    color: #a67687;
+    background-color: #f0c7d7;
+  }
+  ul.todo-list li::before {
+    content: '✔';
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0;
+    color: #cc2e65;
+    font-weight: 700;
+    transition: opacity 0.3s;
+  }
+  ul.todo-list li.checked::before {
+    opacity: 1;
+  }
+</style>
+</head>
+<body>
+  <div class="page-container">
+    <h2>To-Do List</h2>
+    <input id="taskInput" type="text" placeholder="Add new task..." />
+    <button id="addBtn" type="button">Add</button>
+    <ul id="taskList" class="todo-list"></ul>
+  </div>
+
+  <script>
+    const addBtn = document.getElementById('addBtn');
+    const taskInput = document.getElementById('taskInput');
+    const taskList = document.getElementById('taskList');
+
+    function addTask() {
+      const taskText = taskInput.value.trim();
+      if (taskText !== '') {
+        const li = document.createElement('li');
+        li.textContent = taskText;
+        li.addEventListener('click', () => {
+          li.classList.toggle('checked');
+        });
+        taskList.appendChild(li);
+        taskInput.value = '';
+        taskInput.focus();
+      }
+    }
+
+    addBtn.addEventListener('click', addTask);
+
+    taskInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        addTask();
+      }
+    });
+  </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>To-Do List con Spunte</title>
+<style>
+  body {
+    font-family: 'Poppins', Arial, sans-serif;
+    background: linear-gradient(135deg, #fad6de, #fff0f5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  .page-container {
+    background: white;
+    border-radius: 15px;
+    padding: 40px 60px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    width: 400px;
+  }
+  h2 {
+    color: #cc2e65;
+    margin-bottom: 20px;
+  }
+  input[type="text"] {
+    width: calc(100% - 70px);
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #cc2e65;
+    font-size: 1em;
+  }
+  button {
+    padding: 10px 14px;
+    background: #cc2e65;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-left: 6px;
+    font-weight: 600;
+    transition: background 0.3s;
+  }
+  button:hover {
+    background: #a3274f;
+  }
+  ul.todo-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+  }
+  ul.todo-list li {
+    background: #fad6de;
+    padding: 10px 15px 10px 35px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    color: #662b4d;
+    font-weight: 500;
+    cursor: pointer;
+    position: relative;
+    user-select: none;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  ul.todo-list li.checked {
+    text-decoration: line-through;
+    color: #a67687;
+    background-color: #f0c7d7;
+  }
+  ul.todo-list li::before {
+    content: '✔';
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0;
+    color: #cc2e65;
+    font-weight: 700;
+    transition: opacity 0.3s;
+  }
+  ul.todo-list li.checked::before {
+    opacity: 1;
+  }
+</style>
+</head>
+<body>
+  <div class="page-container">
+    <h2>To-Do List</h2>
+    <input id="taskInput" type="text" placeholder="Add new task..." />
+    <button id="addBtn" type="button">Add</button>
+    <ul id="taskList" class="todo-list"></ul>
+  </div>
+
+  <script>
+    const addBtn = document.getElementById('addBtn');
+    const taskInput = document.getElementById('taskInput');
+    const taskList = document.getElementById('taskList');
+
+    function addTask() {
+      const taskText = taskInput.value.trim();
+      if (taskText !== '') {
+        const li = document.createElement('li');
+        li.textContent = taskText;
+        li.addEventListener('click', () => {
+          li.classList.toggle('checked');
+        });
+        taskList.appendChild(li);
+        taskInput.value = '';
+        taskInput.focus();
+      }
+    }
+
+    addBtn.addEventListener('click', addTask);
+
+    taskInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        addTask();
+      }
+    });
+  </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>To-Do List con Spunte</title>
+<style>
+  body {
+    font-family: 'Poppins', Arial, sans-serif;
+    background: linear-gradient(135deg, #fad6de, #fff0f5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  .page-container {
+    background: white;
+    border-radius: 15px;
+    padding: 40px 60px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    width: 400px;
+  }
+  h2 {
+    color: #cc2e65;
+    margin-bottom: 20px;
+  }
+  input[type="text"] {
+    width: calc(100% - 70px);
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #cc2e65;
+    font-size: 1em;
+  }
+  button {
+    padding: 10px 14px;
+    background: #cc2e65;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-left: 6px;
+    font-weight: 600;
+    transition: background 0.3s;
+  }
+  button:hover {
+    background: #a3274f;
+  }
+  ul.todo-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+  }
+  ul.todo-list li {
+    background: #fad6de;
+    padding: 10px 15px 10px 35px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    color: #662b4d;
+    font-weight: 500;
+    cursor: pointer;
+    position: relative;
+    user-select: none;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  ul.todo-list li.checked {
+    text-decoration: line-through;
+    color: #a67687;
+    background-color: #f0c7d7;
+  }
+  ul.todo-list li::before {
+    content: '✔';
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0;
+    color: #cc2e65;
+    font-weight: 700;
+    transition: opacity 0.3s;
+  }
+  ul.todo-list li.checked::before {
+    opacity: 1;
+  }
+</style>
+</head>
+<body>
+  <div class="page-container">
+    <h2>To-Do List</h2>
+    <input id="taskInput" type="text" placeholder="Add new task..." />
+    <button id="addBtn" type="button">Add</button>
+    <ul id="taskList" class="todo-list"></ul>
+  </div>
+
+  <script>
+    const addBtn = document.getElementById('addBtn');
+    const taskInput = document.getElementById('taskInput');
+    const taskList = document.getElementById('taskList');
+
+    function addTask() {
+      const taskText = taskInput.value.trim();
+      if (taskText !== '') {
+        const li = document.createElement('li');
+        li.textContent = taskText;
+        li.addEventListener('click', () => {
+          li.classList.toggle('checked');
+        });
+        taskList.appendChild(li);
+        taskInput.value = '';
+        taskInput.focus();
+      }
+    }
+
+    addBtn.addEventListener('click', addTask);
+
+    taskInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        addTask();
+      }
+    });
+  </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>To-Do List con Spunte</title>
+<style>
+  body {
+    font-family: 'Poppins', Arial, sans-serif;
+    background: linear-gradient(135deg, #fad6de, #fff0f5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  .page-container {
+    background: white;
+    border-radius: 15px;
+    padding: 40px 60px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    width: 400px;
+  }
+  h2 {
+    color: #cc2e65;
+    margin-bottom: 20px;
+  }
+  input[type="text"] {
+    width: calc(100% - 70px);
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #cc2e65;
+    font-size: 1em;
+  }
+  button {
+    padding: 10px 14px;
+    background: #cc2e65;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-left: 6px;
+    font-weight: 600;
+    transition: background 0.3s;
+  }
+  button:hover {
+    background: #a3274f;
+  }
+  ul.todo-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+  }
+  ul.todo-list li {
+    background: #fad6de;
+    padding: 10px 15px 10px 35px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    color: #662b4d;
+    font-weight: 500;
+    cursor: pointer;
+    position: relative;
+    user-select: none;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  ul.todo-list li.checked {
+    text-decoration: line-through;
+    color: #a67687;
+    background-color: #f0c7d7;
+  }
+  ul.todo-list li::before {
+    content: '✔';
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0;
+    color: #cc2e65;
+    font-weight: 700;
+    transition: opacity 0.3s;
+  }
+  ul.todo-list li.checked::before {
+    opacity: 1;
+  }
+</style>
+</head>
+<body>
+  <div class="page-container">
+    <h2>To-Do List</h2>
+    <input id="taskInput" type="text" placeholder="Add new task..." />
+    <button id="addBtn" type="button">Add</button>
+    <ul id="taskList" class="todo-list"></ul>
+  </div>
+
+  <script>
+    const addBtn = document.getElementById('addBtn');
+    const taskInput = document.getElementById('taskInput');
+    const taskList = document.getElementById('taskList');
+
+    function addTask() {
+      const taskText = taskInput.value.trim();
+      if (taskText !== '') {
+        const li = document.createElement('li');
+        li.textContent = taskText;
+        li.addEventListener('click', () => {
+          li.classList.toggle('checked');
+        });
+        taskList.appendChild(li);
+        taskInput.value = '';
+        taskInput.focus();
+      }
+    }
+
+    addBtn.addEventListener('click', addTask);
+
+    taskInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        addTask();
+      }
+    });
+  </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>To-Do List con Spunte</title>
+<style>
+  body {
+    font-family: 'Poppins', Arial, sans-serif;
+    background: linear-gradient(135deg, #fad6de, #fff0f5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  .page-container {
+    background: white;
+    border-radius: 15px;
+    padding: 40px 60px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    width: 400px;
+  }
+  h2 {
+    color: #cc2e65;
+    margin-bottom: 20px;
+  }
+  input[type="text"] {
+    width: calc(100% - 70px);
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #cc2e65;
+    font-size: 1em;
+  }
+  button {
+    padding: 10px 14px;
+    background: #cc2e65;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-left: 6px;
+    font-weight: 600;
+    transition: background 0.3s;
+  }
+  button:hover {
+    background: #a3274f;
+  }
+  ul.todo-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+  }
+  ul.todo-list li {
+    background: #fad6de;
+    padding: 10px 15px 10px 35px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    color: #662b4d;
+    font-weight: 500;
+    cursor: pointer;
+    position: relative;
+    user-select: none;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  ul.todo-list li.checked {
+    text-decoration: line-through;
+    color: #a67687;
+    background-color: #f0c7d7;
+  }
+  ul.todo-list li::before {
+    content: '✔';
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0;
+    color: #cc2e65;
+    font-weight: 700;
+    transition: opacity 0.3s;
+  }
+  ul.todo-list li.checked::before {
+    opacity: 1;
+  }
+</style>
+</head>
+<body>
+  <div class="page-container">
+    <h2>To-Do List</h2>
+    <input id="taskInput" type="text" placeholder="Add new task..." />
+    <button id="addBtn" type="button">Add</button>
+    <ul id="taskList" class="todo-list"></ul>
+  </div>
+
+  <script>
+    const addBtn = document.getElementById('addBtn');
+    const taskInput = document.getElementById('taskInput');
+    const taskList = document.getElementById('taskList');
+
+    function addTask() {
+      const taskText = taskInput.value.trim();
+      if (taskText !== '') {
+        const li = document.createElement('li');
+        li.textContent = taskText;
+        li.addEventListener('click', () => {
+          li.classList.toggle('checked');
+        });
+        taskList.appendChild(li);
+        taskInput.value = '';
+        taskInput.focus();
+      }
+    }
+
+    addBtn.addEventListener('click', addTask);
+
+    taskInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        addTask();
+      }
+    });
+  </script>
+</body>
+</html>
+
 
     .portfolio-card {
       background-color: #fdf5f7;
@@ -104,6 +1793,7 @@
 
 </body>
 </html>
+
 
 
 
