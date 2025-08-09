@@ -1,47 +1,153 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Giulia Lombardo | Portfolio</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects with To-Do</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #f8b4d9, #fbc2eb);
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    /* My Projects card */
+    .projects-card {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      width: 65%;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .projects-card h1 {
+      margin-top: 0;
+      text-align: center;
+      color: #6a1b4d;
+    }
+
+    /* Portfolio Website card inside My Projects */
+    .portfolio-card {
+      background: #fce4ec;
+      border-radius: 10px;
+      padding: 15px;
+      margin-top: 20px;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    }
+
+    .portfolio-card h2 {
+      margin-top: 0;
+      color: #880e4f;
+    }
+
+    .portfolio-card ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .portfolio-card li::before {
+      content: "✓ ";
+      color: green;
+    }
+
+    /* To-do list card */
+    .todo-card {
+      background: white;
+      padding: 15px;
+      border-radius: 12px;
+      width: 30%;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .todo-card h2 {
+      margin-top: 0;
+      color: #6a1b4d;
+      text-align: center;
+    }
+
+    input[type="text"] {
+      width: calc(100% - 60px);
+      padding: 8px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      padding: 8px 12px;
+      margin-left: 5px;
+      background: #f48fb1;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #ec407a;
+    }
+
+    ul.tasks {
+      list-style: none;
+      padding: 0;
+      margin-top: 10px;
+    }
+
+    ul.tasks li {
+      background: #f8f8f8;
+      padding: 6px;
+      border-radius: 5px;
+      margin-bottom: 5px;
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <nav>
-      <h1>Giulia Lombardo</h1>
-      <ul>
-        <li><a href="#about">About</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
 
-  <section id="hero">
-    <h2>Frontend & Full-Stack Developer</h2>
-    <p>Creating clean, functional and aesthetic web experiences.</p>
-    <a href="#projects" class="btn">See my work</a>
-  </section>
+  <div class="container">
+    <!-- My Projects card -->
+    <div class="projects-card">
+      <h1>My Projects</h1>
 
-  <section id="about">
-    <h2>About Me</h2>
-    <p>I’m Giulia, passionate about tech, AI, and creating impactful digital products.</p>
-  </section>
-
-  <section id="projects">
-    <h2>Projects</h2>
-    <div class="project-card">
-      <h3>Portfolio Website</h3>
-      <p>This is my first public project showcasing my skills.</p>
+      <!-- Portfolio Website card inside My Projects -->
+      <div class="portfolio-card">
+        <h2>Portfolio Website</h2>
+        <p>Personal portfolio showcasing my skills, projects, and information.</p>
+        <ul>
+          <li>Responsive design</li>
+          <li>Custom color theme</li>
+          <li>GitHub Pages deployment</li>
+        </ul>
+        <a href="#" style="color:white; background:#c2185b; padding:8px 12px; border-radius:6px; text-decoration:none;">View on GitHub</a>
+      </div>
     </div>
-  </section>
 
-  <footer>
-    <p>© 2025 Giulia Lombardo</p>
-  </footer>
+    <!-- To-do list card -->
+    <div class="todo-card">
+      <h2>To-Do List</h2>
+      <input type="text" id="taskInput" placeholder="Add new task...">
+      <button onclick="addTask()">Add</button>
+      <ul id="taskList" class="tasks"></ul>
+    </div>
+  </div>
 
-  <script src="script.js"></script>
+  <script>
+    function addTask() {
+      const input = document.getElementById("taskInput");
+      const taskText = input.value.trim();
+      if (taskText !== "") {
+        const li = document.createElement("li");
+        li.textContent = taskText;
+        document.getElementById("taskList").appendChild(li);
+        input.value = "";
+      }
+    }
+  </script>
+
 </body>
 </html>
