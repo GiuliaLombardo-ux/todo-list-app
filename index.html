@@ -13,7 +13,7 @@
       --card:#ffffff; --item:#fad6de;
     }
 
-    /* Tema dinamico (cambia con il progresso) */
+
     body{ margin:0; height:100vh; display:flex; justify-content:center; align-items:center;
       background: linear-gradient(135deg,var(--pink1),var(--pink2)); transition: background .5s ease;
       font-family: Georgia, "Times New Roman", serif;
@@ -76,7 +76,7 @@
     .btn-icon:hover{ transform: scale(1.06); background:#fff; }
     .btn-del{ color:#b00020; }
 
-    /* Hint piccolo */
+    
     .hint{ text-align:center; font-size:12px; color:#7a4b62; margin-top:8px; opacity:.8; }
   </style>
 </head>
@@ -91,7 +91,7 @@
     <div class="hint">Click su un task per completarlo • Invio per aggiungere • Salva automatico</div>
   </div>
 
-  <!-- Confetti -->
+ 
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <script>
     const input = document.getElementById('taskInput');
@@ -99,7 +99,6 @@
     const list  = document.getElementById('taskList');
     const tilt  = document.getElementById('tilt');
 
-    // ---------- LocalStorage ----------
     const KEY = 'wow-todo';
     function save(){ 
       const data = [...list.children].map(li => ({text: li.querySelector('.txt').textContent, done: li.classList.contains('completed')}));
@@ -113,7 +112,7 @@
       }catch(e){}
     }
 
-    // ---------- Add / Remove / Toggle ----------
+ 
     function addTask(text, done=false, silentAnim=false){
       if(!text){ return; }
 
@@ -161,7 +160,7 @@
     addBtn.addEventListener('click', handleAdd);
     input.addEventListener('keydown', (e)=>{ if(e.key === 'Enter') handleAdd(); });
 
-    // ---------- Tema dinamico ----------
+  
     function updateTheme(){
       const total = list.children.length;
       const completed = [...list.children].filter(li => li.classList.contains('completed')).length;
@@ -187,7 +186,7 @@
       }
     }
 
-    // ---------- Tilt 3D “vero” ----------
+  
     let rect = null;
     tilt.addEventListener('mouseenter', ()=>{ rect = tilt.getBoundingClientRect(); });
     tilt.addEventListener('mousemove', (e)=>{
@@ -202,10 +201,11 @@
       tilt.style.transform = 'perspective(900px) rotateX(0) rotateY(0)';
     });
 
-    // ---------- Boot ----------
+    // 
     load();
   </script>
 </body>
 </html>
+
 
 
