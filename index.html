@@ -43,7 +43,7 @@
 
     ul{ list-style:none; padding:0; margin:16px 0 0; }
 
-    /* Fade + slide-in su aggiunta */
+    
     li{
       display:flex; align-items:center; justify-content:space-between;
       gap:10px; background: var(--item); color:#532740;
@@ -56,7 +56,7 @@
 
     .txt{ flex:1; user-select:none; }
 
-    /* Stato completato + ✅ che rimbalza */
+   
     li.completed{ text-decoration: line-through; color: #777; background:#e7e7e7; position:relative; }
     li.completed::after{
       content:"✅"; position:absolute; right:10px; top:50%; transform: translateY(-50%);
@@ -88,7 +88,7 @@
       <button id="addBtn">Add</button>
     </div>
     <ul id="taskList"></ul>
-    <div class="hint">Click su un task per completarlo • Invio per aggiungere • Salva automatico</div>
+    <div class="hint">Click on a task to complete it • Press Enter to add • Auto-save enabled</div>
   </div>
 
  
@@ -206,6 +206,7 @@
   </script>
 </body>
 </html>
+
 
 
 
